@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -11,16 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/chatCarlos" />
-            <option value="$PROJECT_DIR$/deliveryDonna" />
-            <option value="$PROJECT_DIR$/eatJack" />
-            <option value="$PROJECT_DIR$/handymanSimardri" />
-            <option value="$PROJECT_DIR$/ibankJack" />
-            <option value="$PROJECT_DIR$/learnSimadri" />
-            <option value="$PROJECT_DIR$/pcRepairCarlos" />
-            <option value="$PROJECT_DIR$/petDonna" />
-            <option value="$PROJECT_DIR$/tinderJerome" />
-            <option value="$PROJECT_DIR$/uberJerome" />
           </set>
         </option>
       </GradleProjectSettings>
