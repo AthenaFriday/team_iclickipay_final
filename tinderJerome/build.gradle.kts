@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0"
+
 }
 
 android {
@@ -10,7 +12,6 @@ android {
     defaultConfig {
         minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -69,7 +70,7 @@ dependencies {
 
     // Image Picker (optional, if you want gallery photo)
     implementation(libs.imagepicker)
-    implementation(libs.androidx.material3.android)
+
 
     // Test
     testImplementation(libs.junit)

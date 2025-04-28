@@ -7,10 +7,11 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
-        mavenCentral()
-        gradlePluginPortal()
+        mavenCentral()         // <-- required for Kotlin Compose Plugin!
+        gradlePluginPortal()   // <-- required for Kotlin Compose Plugin!
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

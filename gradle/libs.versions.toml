@@ -17,9 +17,10 @@ imagepicker = "2.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-composeCompiler = "1.5.15"
-material3Android = "1.3.2"
-
+material3 = "1.3.2" # ✅ rename properly
+runtimeAndroid = "1.8.0"
+navigationRuntimeKtx = "2.8.9"
+composeCompiler = "1.5.15" # ✅ still here for composeOptions, not direct implementation
 
 [libraries]
 # Core
@@ -35,10 +36,8 @@ androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graph
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeUi" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeUi" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeUi" }
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeUi" }
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeUi" }
-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "composeCompiler" }
-
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" } # ✅ Fix here
 
 # Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
@@ -60,14 +59,16 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
-
+# Compose Testing
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "composeUi" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "composeUi" }
-androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
+# Runtime
+androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version = "2.1.0" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" } # ✅ cleaner
