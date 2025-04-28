@@ -54,7 +54,7 @@ fun Premium11(
                     contentDescription = "Congratulations",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
-                        .size(200.dp)
+                        .size(400.dp)
                         .padding(16.dp)
                 )
 
@@ -89,4 +89,8 @@ fun Premium11(
         }
     }
 }
-
+@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Composable
+fun Premium11preview() {
+    Premium11()
+}
