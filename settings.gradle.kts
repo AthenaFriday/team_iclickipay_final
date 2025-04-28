@@ -21,4 +21,13 @@ dependencyResolutionManagement {
 
 rootProject.name = "IclickIpay"
 include(":app")
- 
+include(":chatCarlos")
+include(":pcRepairCarlos")
+include(":learnSimadri")
+include(":handymanSimardri")
+include(":ibankJack")
+include(":petDonna")
+include(":deliveryDonna")
+include(":tinderJerome")
+include(":uberJerome")
+include(":eatJack")
