@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/chat" />
+            <option value="$PROJECT_DIR$/delivery" />
+            <option value="$PROJECT_DIR$/eat" />
+            <option value="$PROJECT_DIR$/handyman" />
+            <option value="$PROJECT_DIR$/ibank" />
+            <option value="$PROJECT_DIR$/learn" />
+            <option value="$PROJECT_DIR$/pc_repair" />
+            <option value="$PROJECT_DIR$/pet" />
+            <option value="$PROJECT_DIR$/tinder" />
+            <option value="$PROJECT_DIR$/uber" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
