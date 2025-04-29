@@ -58,6 +58,8 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
 
     // Testing
     testImplementation(libs.junit)

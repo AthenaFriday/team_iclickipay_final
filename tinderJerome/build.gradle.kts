@@ -70,6 +70,8 @@ dependencies {
 
     // Image Picker (optional, if you want gallery photo)
     implementation(libs.imagepicker)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
 
 
     // Test
