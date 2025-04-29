@@ -1,4 +1,4 @@
-package ibank.transactions_screen
+package com.athenafriday.ibankjack
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background

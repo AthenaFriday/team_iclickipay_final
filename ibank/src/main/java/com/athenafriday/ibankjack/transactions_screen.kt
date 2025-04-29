@@ -1,4 +1,4 @@
-package ibank.transactions_screen
+package com.athenafriday.ibankjack
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
