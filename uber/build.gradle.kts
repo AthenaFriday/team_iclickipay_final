@@ -49,7 +49,7 @@ dependencies {
     implementation(libs.google.material)
 
     // Compose
-    implementation(platform(libs.androidx.compose.bom))
+//    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3) // ✅ correct Material3 reference
     implementation(libs.androidx.activity.compose)

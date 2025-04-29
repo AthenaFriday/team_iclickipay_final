@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material.icons.extended)
+//    implementation(libs.androidx.compose.material.icons.extended)
 
     // Navigation for Compose
     implementation(libs.androidx.navigation.compose)
@@ -69,7 +69,7 @@ dependencies {
     implementation(libs.androidx.camera.view)
 
     // Image Picker (optional, if you want gallery photo)
-    implementation(libs.imagepicker)
+//    implementation(libs.imagepicker)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
