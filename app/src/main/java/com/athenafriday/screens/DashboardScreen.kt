@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.athenafriday.R
+import com.athenafriday.iclickipay.R
 import com.athenafriday.navigation.Destinations
 
 data class AppItem(val label: String, val icon: Painter, val destination: String)
