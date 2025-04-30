@@ -46,8 +46,7 @@ android {
 }
 
 dependencies {
-    // Modules
-    implementation(project(":uber"))
+
 
     // Essentials
     implementation(libs.androidx.core.ktx)
@@ -76,4 +75,19 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    //Modules
+    dependencies {
+        implementation(project(":chat"))
+        implementation(project(":delivery"))
+        implementation(project(":eat"))
+        implementation(project(":handyman"))
+        implementation(project(":ibank"))
+        implementation(project(":learn"))
+        implementation(project(":pc_repair"))
+        implementation(project(":pet"))
+        implementation(project(":tinder"))
+        implementation(project(":uber"))
+    }
+
 }

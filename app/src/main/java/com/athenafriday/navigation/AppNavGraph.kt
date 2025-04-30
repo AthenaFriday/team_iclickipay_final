@@ -7,14 +7,15 @@ import androidx.navigation.compose.composable
 import com.athenafriday.screens.DashboardScreen
 
 // Correct imports for each module's screen
-import com.athenafriday.chatcarlos.screens.ChatScreen
-import com.athenafriday.deliverydonna.screens.DeliveryScreen
-import com.athenafriday.eatjack.screens.EatScreen
-import com.athenafriday.handymansimadri.screens.HandymanScreen
-import com.athenafriday.ibankjack.screens.IbankScreen
-import com.athenafriday.learnsimadri.screens.LearnScreen
-import com.athenafriday.pcrepaircarlos.screens.PcRepairScreen
-import com.athenafriday.petdonna.screens.PetScreen
+
+import com.athenafriday.screens.ChatScreen
+import com.athenafriday.screens.DeliveryScreen
+import com.athenafriday.screens.EatScreen
+import com.athenafriday.screens.HandymanScreen
+import com.athenafriday.screens.IbankScreen
+import com.athenafriday.screens.LearnScreen
+import com.athenafriday.screens.PcRepairScreen
+import com.athenafriday.screens.PetScreen
 import com.athenafriday.tinderjerome.screens.TinderScreen
 import com.athenafriday.uberjerome.screens.UberScreen
 
