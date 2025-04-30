@@ -8,6 +8,7 @@ import com.athenafriday.chatcarlos.navigation.ChatNavHost
 import com.athenafriday.handyman.navigation.HandymanNavHost
 import com.athenafriday.ibankjack.navigation.IbankNavGraph
 import com.athenafriday.learn.navigation.LearnNavHost
+import com.athenafriday.pet.navigation.PetNavHost
 import com.athenafriday.screens.DashboardScreen
 import com.athenafriday.tinderjerome.navigation.TinderNavHost
 import com.athenafriday.uberjerome.navigation.UberNavHost
@@ -37,7 +38,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destinations.IBANK) { IbankNavGraph() }  // Pass navController here
         composable(Destinations.LEARN) { LearnNavHost() }
         // composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
-        // composable(Destinations.PET) { PetScreen(navController) }
+        composable(Destinations.PET) { PetNavHost() }
         composable(Destinations.TINDER) { TinderNavHost() }
         composable(Destinations.UBER) { UberNavHost() }
     }
