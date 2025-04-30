@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.athenafriday.handyman.navigation.HandymanNavHost
 import com.athenafriday.screens.DashboardScreen
 import com.athenafriday.tinderjerome.navigation.TinderNavHost
 
@@ -42,7 +43,7 @@ fun AppNavGraph(navController: NavHostController) {
 //        composable(Destinations.CHAT) { ChatScreen(navController) }
 //        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
 //        composable(Destinations.EAT) { EatScreen(navController) }
-//        composable(Destinations.HANDYMAN) { HandymanScreen(navController) }
+            composable(Destinations.HANDYMAN) { HandymanNavHost() }
 //        composable(Destinations.IBANK) { IbankScreen(navController) }
 //        composable(Destinations.LEARN) { LearnScreen(navController) }
 //        composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
