@@ -1,56 +1,44 @@
-package com.athenafriday.iclickipay.signup
-
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.remember
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import com.athenafriday.iclickipay.R
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
+package com.athenafriday.screens.authentication.signup
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.athenafriday.iclickipay.R
 import com.athenafriday.iclickipay.signup.reusableComposable.ConfirmButton
 import com.athenafriday.iclickipay.signup.reusableComposable.LoadImage
 import com.athenafriday.iclickipay.signup.reusableComposable.Title
-import com.athenafriday.iclickipay.signup.reusableComposable.VerificationCodeInput
-import com.athenafriday.iclickipay.viewmodel.LoginScreenViewModel
-
+import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
+import com.athenafriday.screens.authentication.login.viewmodel.LoginScreenViewModel
+import com.athenafriday.navigation.Destinations
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+fun SignupScreen(modifier: Modifier = Modifier, onSignupSuccess: () -> Unit) {
     val viewModel: LoginScreenViewModel = viewModel()
     val context = LocalContext.current
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    // Add other states like firstName, lastName if needed
 
     Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Title(modifier.fillMaxWidth(), title = "Complete the form")
         LoadImage(modifier.padding(20.dp), R.drawable.sign_up)
 
-        // Pass states to TextFieldColumn
-        TextFieldColomn(
+        TextFieldColumn( // ✅ Corrected name
             email = email,
             onEmailChange = { email = it },
             password = password,
@@ -60,13 +48,21 @@ fun SignupScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.weight(1f))
 
         ConfirmButton(modifier.padding(bottom = 30.dp)) {
-            viewModel.signUpWithEmail(email = email, password = password, context = context)
+            viewModel.signUpWithEmail(
+                email = email,
+                password = password,
+                context = context,
+                onSuccess = {
+                    println("✅ Signup successful. Navigating to dashboard.")
+                    onSignupSuccess()
+                }
+            )
         }
     }
 }
 
 @Composable
-fun TextFieldColomn(
+fun TextFieldColumn( // ✅ Renamed from Colomn
     modifier: Modifier = Modifier,
     email: String,
     onEmailChange: (String) -> Unit,
@@ -95,7 +91,6 @@ fun TextFieldColomn(
         )
     }
 }
-
 
 @Composable
 fun GenderDropdown(modifier: Modifier = Modifier) {
@@ -156,7 +151,6 @@ fun GenericTextField(label: String = "Default Label") {
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun TitlePreview() {
@@ -165,8 +159,14 @@ fun TitlePreview() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ScreenPreview() {
-    SignupScreen()
+    val navController = rememberNavController()
+
+    SignupScreen(onSignupSuccess = {
+        navController.navigate(Destinations.DASHBOARD) {
+            popUpTo(Destinations.SIGNUP) { inclusive = true }
+        }
+    })
 }

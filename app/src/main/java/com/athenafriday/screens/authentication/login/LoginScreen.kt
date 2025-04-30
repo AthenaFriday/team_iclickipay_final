@@ -1,4 +1,4 @@
-package com.athenafriday.iclickipay.login
+package com.athenafriday.screens.authentication.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,19 +19,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.athenafriday.iclickipay.R
-import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
-import com.athenafriday.iclickipay.viewmodel.LoginScreenViewModel
+import com.athenafriday.screens.authentication.login.viewmodel.LoginScreenViewModel
 
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel = viewModel(),
     onLoginClick: () -> Unit = {},
-    onForgotPasswordClick: () -> Unit = {}
+    onForgotPasswordClick: () -> Unit = {},
+    onSignupClick: () -> Unit = {} // ✅ NEW PARAM
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -91,6 +90,7 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 textStyle = LocalTextStyle.current.copy(color = Color.White),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -101,8 +101,7 @@ fun LoginScreen(
                     unfocusedIndicatorColor = Color.White,
                     focusedPlaceholderColor = Color.White.copy(alpha = 0.7f),
                     unfocusedPlaceholderColor = Color.White.copy(alpha = 0.7f)
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                )
             )
 
             OutlinedTextField(
@@ -110,6 +109,8 @@ fun LoginScreen(
                 onValueChange = { password = it },
                 placeholder = { Text("Password", color = Color.White.copy(alpha = 0.7f)) },
                 singleLine = true,
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
@@ -124,9 +125,7 @@ fun LoginScreen(
                     unfocusedIndicatorColor = Color.White,
                     focusedPlaceholderColor = Color.White.copy(alpha = 0.7f),
                     unfocusedPlaceholderColor = Color.White.copy(alpha = 0.7f)
-                ),
-                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                )
             )
 
             TextButton(
@@ -148,10 +147,9 @@ fun LoginScreen(
                         email = email,
                         password = password,
                         onSuccess = {
-                            onLoginClick() // You can use this to navigate
+                            onLoginClick()
                         },
                         onError = {
-                            // Show an error toast or text
                             println("Login failed: $it")
                         }
                     )
@@ -164,8 +162,23 @@ fun LoginScreen(
             ) {
                 Text("Login", color = Color.White, fontSize = 18.sp)
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextButton(
+                onClick = onSignupClick,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    buildAnnotatedString {
+                        append("Don't have an account? ")
+                        withStyle(style = SpanStyle(color = Color(0xFFFF7F2A), fontWeight = FontWeight.Bold)) {
+                            append("Sign up")
+                        }
+                    },
+                    color = Color.White
+                )
+            }
         }
     }
 }
-
-
