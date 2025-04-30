@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.athenafriday.chatcarlos.navigation.ChatNavHost
 import com.athenafriday.handyman.navigation.HandymanNavHost
 import com.athenafriday.learn.navigation.LearnNavHost
 import com.athenafriday.screens.DashboardScreen
@@ -41,7 +42,7 @@ object Destinations {
 fun AppNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Destinations.DASHBOARD) {
         composable(Destinations.DASHBOARD) { DashboardScreen(navController) }
-//        composable(Destinations.CHAT) { ChatScreen(navController) }
+        composable(Destinations.CHAT) { ChatNavHost() }
 //        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
 //        composable(Destinations.EAT) { EatScreen(navController) }
             composable(Destinations.HANDYMAN) { HandymanNavHost() }
