@@ -46,7 +46,7 @@ fun AppNavGraph(navController: NavHostController) {
 //        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
 //        composable(Destinations.EAT) { EatScreen(navController) }
             composable(Destinations.HANDYMAN) { HandymanNavHost() }
-            composable(Destinations.IBANK) { IbankNavGraph() }
+            composable(Destinations.IBANK) { IbankNavGraph(navController) }
             composable(Destinations.LEARN) { LearnNavHost() }
 //        composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
 //        composable(Destinations.PET) { PetScreen(navController) }
