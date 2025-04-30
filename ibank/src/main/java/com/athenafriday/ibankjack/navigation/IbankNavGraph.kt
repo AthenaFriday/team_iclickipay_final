@@ -12,7 +12,7 @@ fun IbankNavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(navController, startDestination = Screen.Welcome.route) {
         composable(Screen.Welcome.route) {
             IbankWelcomeScreen(
-                onBackClick = { navController.popBackStack() },
+//                onBackClick = { navController.popBackStack() },
                 onLetsGoClick = { navController.navigate(Screen.Transactions.route) }
             )
         }

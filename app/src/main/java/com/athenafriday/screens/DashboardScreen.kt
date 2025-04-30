@@ -24,7 +24,7 @@ data class AppItem(val label: String, val icon: Painter, val destination: String
 @Composable
 fun DashboardScreen(navController: NavController) {
     val favorites = listOf(
-        AppItem("Eat", painterResource(id = R.drawable.eat), Destinations.EAT),
+//        AppItem("Eat", painterResource(id = R.drawable.eat), Destinations.EAT),
         AppItem("Tinder", painterResource(id = R.drawable.tinder), Destinations.TINDER),
         AppItem("Uber", painterResource(id = R.drawable.uber), Destinations.UBER),
         AppItem("iBank", painterResource(id = R.drawable.ibank), Destinations.IBANK),
