@@ -25,39 +25,77 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.toSize
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.athenafriday.iclickipay.signup.reusableComposable.ConfirmButton
 import com.athenafriday.iclickipay.signup.reusableComposable.LoadImage
 import com.athenafriday.iclickipay.signup.reusableComposable.Title
 import com.athenafriday.iclickipay.signup.reusableComposable.VerificationCodeInput
+import com.athenafriday.iclickipay.viewmodel.LoginScreenViewModel
 
-@Preview
+
 @Composable
 fun SignupScreen(modifier: Modifier = Modifier) {
-    Column(modifier,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    val viewModel: LoginScreenViewModel = viewModel()
+    val context = LocalContext.current
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    // Add other states like firstName, lastName if needed
+
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Title(modifier.fillMaxWidth(), title = "Complete the form")
         LoadImage(modifier.padding(20.dp), R.drawable.sign_up)
-        TextFieldColomn()
-        Spacer(modifier = Modifier.weight(1f)) // Pushes ConfirmButton to the bottom!
 
-        ConfirmButton(modifier.padding(bottom = 30.dp), onClick = {})
+        // Pass states to TextFieldColumn
+        TextFieldColomn(
+            email = email,
+            onEmailChange = { email = it },
+            password = password,
+            onPasswordChange = { password = it }
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        ConfirmButton(modifier.padding(bottom = 30.dp)) {
+            viewModel.signUpWithEmail(email = email, password = password, context = context)
+        }
     }
 }
 
-
-
 @Composable
-fun TextFieldColomn(modifier: Modifier = Modifier
-    .padding(start = 20.dp, end = 20.dp, bottom = 10.dp)
-    .height(65.dp)) {
-    GenderDropdown(modifier)
-    TextField(modifier, "First Name")
-    TextField(modifier, "Last Name")
-    TextField(modifier, "Email")
-    TextField(modifier, "Phone Number")
+fun TextFieldColomn(
+    modifier: Modifier = Modifier,
+    email: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit
+) {
+    Column(
+        modifier = modifier
+            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp)
+    ) {
+        GenderDropdown()
+        GenericTextField("First Name")
+        GenericTextField("Last Name")
+        OutlinedTextField(
+            value = email,
+            onValueChange = onEmailChange,
+            modifier = Modifier.fillMaxWidth().height(65.dp),
+            label = { Text("Email") }
+        )
+        GenericTextField("Phone Number")
+        OutlinedTextField(
+            value = password,
+            onValueChange = onPasswordChange,
+            modifier = Modifier.fillMaxWidth().height(65.dp),
+            label = { Text("Password") }
+        )
+    }
 }
+
 
 @Composable
 fun GenderDropdown(modifier: Modifier = Modifier) {
@@ -108,16 +146,16 @@ fun GenderDropdown(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TextField(modifier: Modifier = Modifier, label: String = "Defaul Label") {
+fun GenericTextField(label: String = "Default Label") {
     var value by remember { mutableStateOf("") }
     OutlinedTextField(
         value = value,
         onValueChange = { value = it },
-        modifier = modifier
-            .fillMaxWidth(),
-        label = {Text(label)},
+        modifier = Modifier.fillMaxWidth().height(65.dp),
+        label = { Text(label) },
     )
 }
+
 
 @Preview(showBackground = true)
 @Composable
