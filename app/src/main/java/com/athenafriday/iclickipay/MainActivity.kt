@@ -4,18 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
-import com.athenafriday.uberjerome.navigation.UberNavHost
-import com.athenafriday.ibankjack.navigation.IbankNavGraph
+import com.athenafriday.navigation.AppNavGraph // ✅ Import your navigation graph
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,18 +19,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             IclickIpayTheme {
+                val navController = rememberNavController() // ✅ NavController needed
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val navController = rememberNavController()
-                    Column(Modifier.padding(innerPadding)) {
+                    Box(Modifier.padding(innerPadding)) {
+                        AppNavGraph(navController = navController) // ✅ Use your nav graph
 
-                        IbankNavGraph(navController)
-
-//                        UberNavHost(navController)
                     }
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
                 }
             }
 
@@ -42,18 +32,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     IclickIpayTheme {
-        Greeting("Android")
+        Text("Dashboard Preview")
     }
 }
