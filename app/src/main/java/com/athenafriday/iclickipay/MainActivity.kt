@@ -32,12 +32,7 @@ class MainActivity : ComponentActivity() {
 
         }
     }
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IclickIpayTheme {
-        Text("Dashboard Preview")
-    }
 }
+
+
+
