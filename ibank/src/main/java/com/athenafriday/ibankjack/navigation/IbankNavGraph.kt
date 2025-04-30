@@ -8,7 +8,8 @@ import androidx.navigation.compose.rememberNavController
 import com.athenafriday.ibankjack.screen.*
 
 @Composable
-fun IbankNavGraph(navController: NavHostController = rememberNavController()) {
+fun IbankNavGraph(main_app_navController: NavHostController) {
+    val navController = rememberNavController()
     NavHost(navController, startDestination = Screen.Welcome.route) {
         composable(Screen.Welcome.route) {
             IbankWelcomeScreen(
@@ -19,7 +20,7 @@ fun IbankNavGraph(navController: NavHostController = rememberNavController()) {
         composable(Screen.Transactions.route) {
             TransactionsScreen(
                 onTransactionClick = {navController.navigate(Screen.TransactionDetail.route)},
-                onHomeClick = {},
+                onHomeClick = {main_app_navController.navigate("dashboard")},
                 onAddCardClick = {
                     navController.navigate(Screen.AddCard.route)
                 },
