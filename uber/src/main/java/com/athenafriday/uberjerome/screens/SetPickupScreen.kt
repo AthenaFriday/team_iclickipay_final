@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,6 +16,8 @@ import com.athenafriday.uberjerome.navigation.UberDestinations
 
 @Composable
 fun SetPickupScreen(navController: NavController) {
+    var pickupText by remember { mutableStateOf("") } // ✅ Pickup input state
+
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -46,8 +48,8 @@ fun SetPickupScreen(navController: NavController) {
                     .padding(16.dp)
             ) {
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = pickupText,
+                    onValueChange = { pickupText = it }, // ✅ Input updates state
                     placeholder = { Text("Set pick up location") },
                     modifier = Modifier
                         .fillMaxWidth()

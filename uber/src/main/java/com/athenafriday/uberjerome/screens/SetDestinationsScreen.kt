@@ -6,9 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +21,8 @@ import com.athenafriday.uberjerome.navigation.UberDestinations
 @Composable
 fun SetDestinationScreen(navController: NavController) {
     val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
+    var destinationText by remember { mutableStateOf("") } // ✅ Add state to hold input
 
     Scaffold(
         topBar = {
@@ -64,8 +65,8 @@ fun SetDestinationScreen(navController: NavController) {
                     .padding(16.dp)
             ) {
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = destinationText, // ✅ Uses mutable state
+                    onValueChange = { destinationText = it }, // ✅ Updates state
                     placeholder = { Text("Set destination location") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -87,7 +88,9 @@ fun SetDestinationScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { navController.navigate(UberDestinations.SetPickup) },
+                    onClick = {
+                        navController.navigate(UberDestinations.SetPickup)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),

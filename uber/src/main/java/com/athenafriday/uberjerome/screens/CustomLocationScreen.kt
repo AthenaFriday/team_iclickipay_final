@@ -13,6 +13,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.foundation.layout.navigationBarsPadding
 
 @Composable
 fun CustomLocationScreen(navController: NavController) {
@@ -58,11 +59,15 @@ fun CustomLocationScreen(navController: NavController) {
                 shape = RoundedCornerShape(12.dp)
             )
 
+            Spacer(modifier = Modifier.weight(1f)) // ✅ Pushes button to the bottom
+
             Button(
                 onClick = { /* Submit logic */ },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(56.dp)
+                    .navigationBarsPadding() // ✅ Prevents overlap with nav bar
+                    .padding(bottom = 8.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text("Confirm")

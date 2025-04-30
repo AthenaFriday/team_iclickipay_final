@@ -2,12 +2,12 @@ package com.athenafriday.uberjerome.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
@@ -19,6 +19,7 @@ import com.athenafriday.uberjerome.navigation.UberDestinations
 @Composable
 fun EnterLocationScreen(navController: NavController) {
     var location by remember { mutableStateOf("") }
+    val results = listOf("Johannesburg", "Johannesburg", "Johannesburg")
 
     Scaffold { innerPadding ->
         Column(
@@ -26,39 +27,38 @@ fun EnterLocationScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
                 .background(Color.White)
+                .padding(horizontal = 16.dp)
         ) {
-            // Location Search
             OutlinedTextField(
                 value = location,
                 onValueChange = { location = it },
                 placeholder = { Text("Enter location") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(top = 24.dp, bottom = 16.dp),
                 shape = RoundedCornerShape(12.dp),
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Search Results
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f, fill = true)
             ) {
-                repeat(3) {
-                    LocationSearchItem(name = "Johannesburg")
+                items(results) { result ->
+                    LocationSearchItem(name = result)
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(12.dp)) // spacing from search list
 
-            // Confirm Button
             Button(
                 onClick = { navController.navigate(UberDestinations.SelectCar) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
-                    .padding(16.dp),
+                    .padding(bottom = 16.dp), // lift above screen edge
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text("Confirm Location", fontSize = 16.sp)
@@ -74,7 +74,6 @@ fun LocationSearchItem(name: String) {
             .fillMaxWidth()
             .background(Color(0xFFF7F7F7), shape = RoundedCornerShape(8.dp))
             .padding(16.dp)
-            .padding(bottom = 8.dp)
     ) {
         Text(name, fontSize = 16.sp, color = Color.Black)
     }
