@@ -1,5 +1,6 @@
 package com.athenafriday.ibankjack.screen
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -24,9 +25,10 @@ import androidx.navigation.NavController
 
 @Composable
 fun IbankWelcomeScreen(
-    onBackClick: () -> Unit = {},
+//    onBackClick: () -> Unit = {},
     onLetsGoClick: () -> Unit = {}
 ) {
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -39,7 +41,11 @@ fun IbankWelcomeScreen(
                 .height(56.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onBackClick) {
+            IconButton(
+//                onClick = onBackClick
+                onClick = { backDispatcher?.onBackPressed() }
+
+            ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Back",
