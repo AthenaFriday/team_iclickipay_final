@@ -51,22 +51,22 @@ fun TransactionTopBar(
                 )
             }
 
-            Text(
-                text = "Edit",
-                color = Color(0xFFFF7A1A),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier
-                    .clickable(onClick = onEditClick)
-                    .padding(end = 8.dp)
-            )
+//            Text(
+//                text = "Edit",
+//                color = Color(0xFFFF7A1A),
+//                fontSize = 16.sp,
+//                fontWeight = FontWeight.Medium,
+//                modifier = Modifier
+//                    .clickable(onClick = onEditClick)
+//                    .padding(end = 8.dp)
+//            )
         }
     }
 }
 
 @Composable
 fun TransactionDetailScreen(
-    transaction: Transaction,
+    transaction: Transaction = dummyTransaction,
     onBackClick: () -> Unit = {},
     onEditClick: () -> Unit = {}
 ) {

@@ -53,7 +53,8 @@ fun TransactionsScreen(
     modifier: Modifier = Modifier,
     onTransactionClick: (Transaction) -> Unit,
     onHomeClick: () -> Unit = {},
-    onAddCardClick: () -> Unit = {}
+    onAddCardClick: () -> Unit = {},
+    onShowCategoriesClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -106,7 +107,8 @@ fun TransactionsScreen(
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .height(650.dp)
                 .border(
                     width = 2.dp,
                     color = MaterialTheme.colorScheme.primary,
@@ -119,6 +121,26 @@ fun TransactionsScreen(
                 Divider()
             }
         }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 20.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Button(
+                onClick = onShowCategoriesClick,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A1A))
+            ) {
+                Text(
+                    text = "Show Categories",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+
     }
 }
 

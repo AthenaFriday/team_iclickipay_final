@@ -18,17 +18,29 @@ fun IbankNavGraph(navController: NavHostController = rememberNavController()) {
         }
         composable(Screen.Transactions.route) {
             TransactionsScreen(
-                onTransactionClick = {},
+                onTransactionClick = {navController.navigate(Screen.TransactionDetail.route)},
                 onHomeClick = {},
                 onAddCardClick = {
                     navController.navigate(Screen.AddCard.route)
-                }
+                },
+                onShowCategoriesClick = {navController.navigate(Screen.Categories.route)}
             )
         }
         composable(Screen.AddCard.route) {
             AddCardScreen(
                 onBackClick = { navController.popBackStack() },
                 onAddCardClick = { navController.navigate(Screen.Transactions.route) }
+            )
+        }
+        composable(Screen.TransactionDetail.route) {
+            TransactionDetailScreen(
+
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.Categories.route) {
+            CategoriesScreen(
+                onBackClick = { navController.popBackStack() }
             )
         }
         // add more screens here...
