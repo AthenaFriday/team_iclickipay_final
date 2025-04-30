@@ -23,9 +23,11 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(Modifier.padding(innerPadding)) {
                         AppNavGraph(navController = navController) // ✅ Use your nav graph
+
                     }
                 }
             }
+
         }
     }
 }
