@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.athenafriday.iclickipay.login.LoginScreen
 import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
 import com.athenafriday.uberjerome.navigation.UberNavHost
 
@@ -22,20 +23,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             IclickIpayTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val navController = rememberNavController()
-                    Column(Modifier.padding(innerPadding)) {
-                        UberNavHost(navController)
-                    }
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
+                LoginScreen()
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    val navController = rememberNavController()
+//                    Column(Modifier.padding(innerPadding)) {
+//                        UberNavHost(navController)
+//                    }
                 }
             }
         }
     }
-}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

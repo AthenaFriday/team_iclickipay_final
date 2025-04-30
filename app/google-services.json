@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "501634685694",
+    "project_id": "iclickipay-loginauth",
+    "storage_bucket": "iclickipay-loginauth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501634685694:android:fb7e77c4db5ddeffb923af",
+        "android_client_info": {
+          "package_name": "com.athenafriday.iclickipay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6fSxhHS_oLYYBDD80JjtJkLfZ63LfJ1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
