@@ -1,23 +1,15 @@
 package com.athenafriday.uberjerome.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.athenafriday.uberjerome.screens.CarArrivingScreen
-import com.athenafriday.uberjerome.screens.ChoosePaymentScreen
-import com.athenafriday.uberjerome.screens.CustomLocationScreen
-import com.athenafriday.uberjerome.screens.DelayedTripScreen
-import com.athenafriday.uberjerome.screens.EnterLocationScreen
-import com.athenafriday.uberjerome.screens.RateDriverScreen
-import com.athenafriday.uberjerome.screens.SelectCarScreen
-import com.athenafriday.uberjerome.screens.SetDestinationScreen
-import com.athenafriday.uberjerome.screens.SetPickupScreen
-import com.athenafriday.uberjerome.screens.TripCompleteScreen
-import com.athenafriday.uberjerome.screens.TripInProgressScreen
+import androidx.navigation.compose.rememberNavController
+import com.athenafriday.uberjerome.screens.*
 
 @Composable
-fun UberNavHost(navController: NavHostController) {
+fun UberNavHost() {
+    val navController = rememberNavController()
+
     NavHost(
         navController = navController,
         startDestination = UberDestinations.SetDestination

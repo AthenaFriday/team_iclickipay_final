@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.athenafriday.screens.DashboardScreen
+import com.athenafriday.tinderjerome.navigation.TinderNavHost
 
 // Correct imports for each module's screen
 
@@ -14,9 +15,10 @@ import com.athenafriday.screens.DashboardScreen
 //import com.athenafriday.handymanSimadri.screens.HandymanScreen
 //import com.athenafriday.ibankJack.screens.IbankScreen
 //import com.athenafriday.learnSimadri.screens.LearnScreen
-//import com.athenafriday.pcRepairCarlos.screens.PcRepairScreen
+//import com.athenafriday.pcrepaircarlos.screens.PCRepairScreen
 //import com.athenafriday.petDonna.screens.PetScreen
 import com.athenafriday.tinderjerome.screens.TinderScreen
+import com.athenafriday.uberjerome.navigation.UberNavHost
 import com.athenafriday.uberjerome.screens.UberScreen
 
 object Destinations {
@@ -43,9 +45,10 @@ fun AppNavGraph(navController: NavHostController) {
 //        composable(Destinations.HANDYMAN) { HandymanScreen(navController) }
 //        composable(Destinations.IBANK) { IbankScreen(navController) }
 //        composable(Destinations.LEARN) { LearnScreen(navController) }
-//        composable(Destinations.PC_REPAIR) { PcRepairScreen(navController) }
+//        composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
 //        composable(Destinations.PET) { PetScreen(navController) }
-        composable(Destinations.TINDER) { TinderScreen(navController) }
-        composable(Destinations.UBER) { UberScreen(navController) }
+          composable(Destinations.TINDER) { TinderNavHost() }
+          composable(Destinations.UBER) { UberNavHost() }
+
     }
 }

@@ -1,26 +1,15 @@
 package com.athenafriday.tinderjerome.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.athenafriday.tinderjerome.navigation.TinderDestinations
-import com.athenafriday.tinderjerome.screens.AccountSettingsScreen
-import com.athenafriday.tinderjerome.screens.AddPhotoScreen
-import com.athenafriday.tinderjerome.screens.BoostScreen
-import com.athenafriday.tinderjerome.screens.CompleteProfileScreen
-import com.athenafriday.tinderjerome.screens.GeolocationScreen
-import com.athenafriday.tinderjerome.screens.LikeScreen
-import com.athenafriday.tinderjerome.screens.ProfileDetailsScreen
-import com.athenafriday.tinderjerome.screens.SuperLikeScreen
-import com.athenafriday.tinderjerome.screens.SwipeScreen
-import com.athenafriday.tinderjerome.screens.TakePhotoScreen
-import com.athenafriday.tinderjerome.screens.TutorialScreen
-import com.athenafriday.tinderjerome.screens.WelcomeScreen
-
+import androidx.navigation.compose.rememberNavController
+import com.athenafriday.tinderjerome.screens.*
 
 @Composable
-fun TinderNavHost(navController: NavHostController) {
+fun TinderNavHost() {
+    val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = TinderDestinations.Welcome) {
         composable(TinderDestinations.Welcome) { WelcomeScreen(navController) }
         composable(TinderDestinations.AddPhoto) { AddPhotoScreen(navController) }
@@ -36,4 +25,3 @@ fun TinderNavHost(navController: NavHostController) {
         composable(TinderDestinations.AccountSettings) { AccountSettingsScreen(navController) }
     }
 }
-

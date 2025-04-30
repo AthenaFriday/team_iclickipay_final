@@ -1,6 +1,9 @@
 package com.athenafriday.tinderjerome.screens
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,15 +14,29 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.athenafriday.tinderjerome.navigation.TinderDestinations
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(navController: NavController) {
-    Scaffold { paddingValues ->  // ✅ capture paddingValues
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Welcome") },
+                navigationIcon = {
+                    IconButton(onClick = { backDispatcher?.onBackPressed() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues) // ✅ system padding
-                .padding(16.dp)          // ✅ your custom padding
+                .padding(paddingValues)
+                .padding(16.dp)
         ) {
             Button(
                 onClick = { navController.navigate(TinderDestinations.AddPhoto) }
