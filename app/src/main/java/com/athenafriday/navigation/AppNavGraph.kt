@@ -12,7 +12,7 @@ import com.athenafriday.screens.DashboardScreen
 //import com.athenafriday.deliveryDonna.screens.DeliveryScreen
 //import com.athenafriday.eatJack.screens.EatScreen
 //import com.athenafriday.handymanSimadri.screens.HandymanScreen
-//import com.athenafriday.ibankJack.screens.IbankScreen
+//import com.athenafriday.ibankjack.screen.IbankWelcomeScreen
 //import com.athenafriday.learnSimadri.screens.LearnScreen
 //import com.athenafriday.pcRepairCarlos.screens.PcRepairScreen
 //import com.athenafriday.petDonna.screens.PetScreen
@@ -41,7 +41,7 @@ fun AppNavGraph(navController: NavHostController) {
 //        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
 //        composable(Destinations.EAT) { EatScreen(navController) }
 //        composable(Destinations.HANDYMAN) { HandymanScreen(navController) }
-//        composable(Destinations.IBANK) { IbankScreen(navController) }
+//        composable(Destinations.IBANK) { IbankWelcomeScreen(navController) }
 //        composable(Destinations.LEARN) { LearnScreen(navController) }
 //        composable(Destinations.PC_REPAIR) { PcRepairScreen(navController) }
 //        composable(Destinations.PET) { PetScreen(navController) }

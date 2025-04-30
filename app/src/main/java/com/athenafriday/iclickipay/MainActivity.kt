@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
 import com.athenafriday.uberjerome.navigation.UberNavHost
+import com.athenafriday.ibankjack.navigation.IbankNavGraph
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
                     Column(Modifier.padding(innerPadding)) {
-                        UberNavHost(navController)
+
+                        IbankNavGraph(navController)
+
+//                        UberNavHost(navController)
                     }
 //                    Greeting(
 //                        name = "Android",
@@ -33,6 +37,7 @@ class MainActivity : ComponentActivity() {
 //                    )
                 }
             }
+
         }
     }
 }
