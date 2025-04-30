@@ -1,8 +1,12 @@
 package com.athenafriday.uberjerome.screens
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,9 +18,23 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.athenafriday.uberjerome.navigation.UberDestinations
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetDestinationScreen(navController: NavController) {
-    Scaffold { innerPadding ->
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Set Destination") },
+                navigationIcon = {
+                    IconButton(onClick = { backDispatcher?.onBackPressed() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

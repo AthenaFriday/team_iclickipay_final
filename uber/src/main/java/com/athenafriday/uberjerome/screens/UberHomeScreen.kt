@@ -44,7 +44,7 @@ fun UberHomeScreen() {
         }
 
         // 👇 This hosts the real screens inside the navController
-        UberNavHost(navController = navController)
+        UberNavHost()
     }
 }
 
