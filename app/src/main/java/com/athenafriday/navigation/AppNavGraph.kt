@@ -8,14 +8,14 @@ import com.athenafriday.screens.DashboardScreen
 
 // Correct imports for each module's screen
 
-import com.athenafriday.screens.ChatScreen
-import com.athenafriday.screens.DeliveryScreen
-import com.athenafriday.screens.EatScreen
-import com.athenafriday.screens.HandymanScreen
-import com.athenafriday.screens.IbankScreen
-import com.athenafriday.screens.LearnScreen
-import com.athenafriday.screens.PcRepairScreen
-import com.athenafriday.screens.PetScreen
+//import com.athenafriday.chatCarlos.screens.ChatScreen
+//import com.athenafriday.deliveryDonna.screens.DeliveryScreen
+//import com.athenafriday.eatJack.screens.EatScreen
+//import com.athenafriday.handymanSimadri.screens.HandymanScreen
+//import com.athenafriday.ibankJack.screens.IbankScreen
+//import com.athenafriday.learnSimadri.screens.LearnScreen
+//import com.athenafriday.pcRepairCarlos.screens.PcRepairScreen
+//import com.athenafriday.petDonna.screens.PetScreen
 import com.athenafriday.tinderjerome.screens.TinderScreen
 import com.athenafriday.uberjerome.screens.UberScreen
 
@@ -37,14 +37,14 @@ object Destinations {
 fun AppNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Destinations.DASHBOARD) {
         composable(Destinations.DASHBOARD) { DashboardScreen(navController) }
-        composable(Destinations.CHAT) { ChatScreen(navController) }
-        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
-        composable(Destinations.EAT) { EatScreen(navController) }
-        composable(Destinations.HANDYMAN) { HandymanScreen(navController) }
-        composable(Destinations.IBANK) { IbankScreen(navController) }
-        composable(Destinations.LEARN) { LearnScreen(navController) }
-        composable(Destinations.PC_REPAIR) { PcRepairScreen(navController) }
-        composable(Destinations.PET) { PetScreen(navController) }
+//        composable(Destinations.CHAT) { ChatScreen(navController) }
+//        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
+//        composable(Destinations.EAT) { EatScreen(navController) }
+//        composable(Destinations.HANDYMAN) { HandymanScreen(navController) }
+//        composable(Destinations.IBANK) { IbankScreen(navController) }
+//        composable(Destinations.LEARN) { LearnScreen(navController) }
+//        composable(Destinations.PC_REPAIR) { PcRepairScreen(navController) }
+//        composable(Destinations.PET) { PetScreen(navController) }
         composable(Destinations.TINDER) { TinderScreen(navController) }
         composable(Destinations.UBER) { UberScreen(navController) }
     }

@@ -63,6 +63,16 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(project(":eat"))
+    implementation(project(":handyman"))
+    implementation(project(":chat"))
+    implementation(project(":tinder"))
+    implementation(project(":delivery"))
+    implementation(project(":pc_repair"))
+    implementation(project(":learn"))
+    implementation(project(":ibank"))
+    implementation(project(":pet"))
+    implementation(project(":uber"))
 
     // Testing
     testImplementation(libs.junit)
