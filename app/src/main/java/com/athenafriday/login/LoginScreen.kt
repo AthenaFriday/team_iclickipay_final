@@ -168,14 +168,4 @@ fun LoginScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    IclickIpayTheme {
-        LoginScreen(
-            viewModel = object : LoginScreenViewModel() {}, // Mock instance
-            onLoginClick = {},
-            onForgotPasswordClick = {}
-        )
-    }
-}
+

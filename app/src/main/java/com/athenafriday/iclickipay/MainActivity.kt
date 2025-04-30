@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             IclickIpayTheme {
-                LoginScreen()
+                TestChatModuleScreen()
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    val navController = rememberNavController()
 //                    Column(Modifier.padding(innerPadding)) {
