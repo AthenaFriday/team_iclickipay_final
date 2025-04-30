@@ -1,4 +1,4 @@
-package com.athenafriday.iclickipay.ui
+package com.athenafriday.iclickipay.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
