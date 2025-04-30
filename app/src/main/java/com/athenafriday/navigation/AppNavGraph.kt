@@ -14,7 +14,7 @@ import com.athenafriday.tinderjerome.navigation.TinderNavHost
 //import com.athenafriday.deliveryDonna.screens.DeliveryScreen
 //import com.athenafriday.eatJack.screens.EatScreen
 //import com.athenafriday.handymanSimadri.screens.HandymanScreen
-//import com.athenafriday.ibankjack.screen.IbankWelcomeScreen
+//import com.athenafriday.ibankJack.screens.IbankScreen
 //import com.athenafriday.learnSimadri.screens.LearnScreen
 //import com.athenafriday.pcrepaircarlos.screens.PCRepairScreen
 //import com.athenafriday.petDonna.screens.PetScreen
@@ -39,16 +39,15 @@ object Destinations {
 @Composable
 fun AppNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Destinations.DASHBOARD) {
-        composable(Destinations.DASHBOARD) { DashboardScreen(navController) }
-//        composable(Destinations.CHAT) { ChatScreen(navController) }
-//        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
-//        composable(Destinations.EAT) { EatScreen(navController) }
+          composable(Destinations.DASHBOARD) { DashboardScreen(navController) }
+//        composable(Destinations.CHAT) { ChatNavHost(navController) }
+//        composable(Destinations.DELIVERY) { DeliveryNavHost(navController) }
+//        composable(Destinations.EAT) { EatNavHost(navController) }
           composable(Destinations.HANDYMAN) { HandymanNavHost() }
-//        composable(Destinations.IBANK) { IbankScreen(navController) }
-
-//        composable(Destinations.LEARN) { LearnScreen(navController) }
-//        composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
-//        composable(Destinations.PET) { PetScreen(navController) }
+//        composable(Destinations.IBANK) { IbankNavHost(navController) }
+//        composable(Destinations.LEARN) { LearnNavHost(navController) }
+//        composable(Destinations.PC_REPAIR) { PCRepairNavHost(navController) }
+//        composable(Destinations.PET) { PetNavHost(navController) }
           composable(Destinations.TINDER) { TinderNavHost() }
           composable(Destinations.UBER) { UberNavHost() }
 
