@@ -6,23 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.athenafriday.chatcarlos.navigation.ChatNavHost
 import com.athenafriday.handyman.navigation.HandymanNavHost
+import com.athenafriday.ibankjack.navigation.IbankNavGraph
 import com.athenafriday.learn.navigation.LearnNavHost
 import com.athenafriday.screens.DashboardScreen
 import com.athenafriday.tinderjerome.navigation.TinderNavHost
-
-// Correct imports for each module's screen
-
-//import com.athenafriday.chatCarlos.screens.ChatScreen
-//import com.athenafriday.deliveryDonna.screens.DeliveryScreen
-//import com.athenafriday.eatJack.screens.EatScreen
-//import com.athenafriday.handymanSimadri.screens.HandymanScreen
-import com.athenafriday.ibankjack.navigation.IbankNavGraph
-//import com.athenafriday.learnSimadri.screens.LearnScreen
-//import com.athenafriday.pcrepaircarlos.screens.PCRepairScreen
-//import com.athenafriday.petDonna.screens.PetScreen
-import com.athenafriday.tinderjerome.screens.TinderScreen
 import com.athenafriday.uberjerome.navigation.UberNavHost
-import com.athenafriday.uberjerome.screens.UberScreen
 
 object Destinations {
     const val DASHBOARD = "dashboard"
@@ -43,15 +31,14 @@ fun AppNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Destinations.DASHBOARD) {
         composable(Destinations.DASHBOARD) { DashboardScreen(navController) }
         composable(Destinations.CHAT) { ChatNavHost() }
-//        composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
-//        composable(Destinations.EAT) { EatScreen(navController) }
-            composable(Destinations.HANDYMAN) { HandymanNavHost() }
-            composable(Destinations.IBANK) { IbankNavGraph(navController) }
-            composable(Destinations.LEARN) { LearnNavHost() }
-//        composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
-//        composable(Destinations.PET) { PetScreen(navController) }
-          composable(Destinations.TINDER) { TinderNavHost() }
-          composable(Destinations.UBER) { UberNavHost() }
-
+        // composable(Destinations.DELIVERY) { DeliveryScreen(navController) }
+        // composable(Destinations.EAT) { EatScreen(navController) }
+        composable(Destinations.HANDYMAN) { HandymanNavHost() }
+        composable(Destinations.IBANK) { IbankNavGraph() }  // Pass navController here
+        composable(Destinations.LEARN) { LearnNavHost() }
+        // composable(Destinations.PC_REPAIR) { PCRepairScreen(navController) }
+        // composable(Destinations.PET) { PetScreen(navController) }
+        composable(Destinations.TINDER) { TinderNavHost() }
+        composable(Destinations.UBER) { UberNavHost() }
     }
 }
