@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.athenafriday.iclickipay.login.LoginScreen
 import com.athenafriday.iclickipay.ui.theme.IclickIpayTheme
 import com.athenafriday.navigation.AppNavGraph // ✅ Import your navigation graph
 
@@ -25,12 +26,13 @@ class MainActivity : ComponentActivity() {
                         AppNavGraph(navController = navController) // ✅ Use your nav graph
 
                     }
+
                 }
             }
 
         }
     }
-}
+
 
 @Preview(showBackground = true)
 @Composable
