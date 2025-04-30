@@ -47,16 +47,19 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    // Compose
-    implementation(platform(libs.androidx.compose.bom.v20250401))
-    implementation(libs.androidx.compose.ui.ui)
-    implementation(libs.androidx.compose.ui.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3.material3)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.navigation.compose)
-    debugImplementation(libs.androidx.compose.ui.ui.tooling)
+    implementation (libs.maps.compose)
+    implementation (libs.play.services.maps)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation ("androidx.compose.material:material-icons-extended:1.5.1")
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
