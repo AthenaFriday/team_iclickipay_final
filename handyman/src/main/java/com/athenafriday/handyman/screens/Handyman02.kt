@@ -1,86 +1,391 @@
 package com.athenafriday.handyman.screens
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx .compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.*
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.material3.ExperimentalMaterial3Api
+import com.athenafriday.handyman.R
+
+private val Orange500 = Color(0xFFF77E1B)
+private val DarkText   = Color(0xFF1F1F1F)
+private val GrayText   = Color(0xFF9E9E9E)
+private val BorderGray = Color(0xFFCCCCCC)
+
+@Composable
+fun SearchField(
+    text: String,
+    onTextChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(1.dp, BorderGray),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(56.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .pointerInput(Unit) {
+                    detectTapGestures { /* focus logic if needed */ }
+                },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BasicTextField(
+                value = text,
+                onValueChange = onTextChange,
+                singleLine = true,
+                textStyle = LocalTextStyle.current.copy(color = DarkText),
+                decorationBox = { inner ->
+                    if (text.isEmpty()) {
+                        Text(placeholder, color = GrayText, style = MaterialTheme.typography.bodyMedium)
+                    }
+                    inner()
+                },
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = null,
+                tint = GrayText
+            )
+        }
+    }
+}
+
+@Composable
+fun TechnicianCard(
+    navController: NavController,
+    name: String,
+    location: String,
+    skills: List<String>,
+    rating: String,
+    distance: String,
+    price: String
+) {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Column {
+            Box {
+                Image(
+                    painter = painterResource(R.drawable.jessy_jones),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(140.dp)
+                        .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                )
+                IconButton(
+                    onClick = { navController.navigate("handyman03") },
+                    modifier = Modifier
+                        .size(32.dp)
+                        .background(Color.White, shape = CircleShape)
+                        .align(Alignment.TopEnd)
+                        .padding(4.dp)
+                ) {
+                    Icon(Icons.Default.FavoriteBorder, contentDescription = null, tint = GrayText)
+                }
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(name, fontWeight = FontWeight.Bold, color = DarkText)
+                    Text(location, color = GrayText, style = MaterialTheme.typography.bodySmall)
+                }
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(skills.joinToString(" / "), color = DarkText, style = MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            Spacer(Modifier.height(12.dp))
+            Divider(color = BorderGray, thickness = 1.dp)
+            Spacer(Modifier.height(8.dp))
+
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Star, contentDescription = null, tint = Orange500, modifier = Modifier.size(16.dp))
+                    Spacer(Modifier.width(4.dp))
+                    Text(rating, color = DarkText, style = MaterialTheme.typography.bodySmall)
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.DirectionsWalk, contentDescription = null, tint = GrayText, modifier = Modifier.size(16.dp))
+                    Spacer(Modifier.width(4.dp))
+                    Text(distance, color = DarkText, style = MaterialTheme.typography.bodySmall)
+                }
+                Text(price, color = DarkText, style = MaterialTheme.typography.bodySmall)
+            }
+
+            Spacer(Modifier.height(12.dp))
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Handyman02(navController: NavController) {
-    var selectedDate by remember { mutableStateOf(LocalDate.now()) }
+    var searchQuery by remember { mutableStateOf("") }
+    val scroll = rememberScrollState()
+    val need = "Plumber"
+    val date = "20 Mar - 10h"
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
-        IconButton(onClick = { navController.popBackStack() }) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-        }
-        // Header with name + month selector
-        Text("Jenny Jones", style = MaterialTheme.typography.headlineSmall)
-        Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scroll)
+            .background(Color.White)
+    ) {
+        // Header image with home icon
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
         ) {
-            Text(selectedDate.month.name, fontWeight = FontWeight.Bold)
-            IconButton(onClick = { /*next month*/ }) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Next") // rotate 180 for forward
+            Image(
+                painter = painterResource(R.drawable.handyman_header),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            IconButton(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(40.dp)
+                    .background(Color.White, shape = CircleShape)
+                    .align(Alignment.TopStart)
+            ) {
+                Icon(
+                    Icons.Default.Home,
+                    contentDescription = "Home",
+                    tint = Orange500
+                )
             }
         }
-        // Weekday header
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-            DayOfWeek.values().forEach { day ->
-                Text(day.getDisplayName(TextStyle.SHORT, Locale.getDefault()))
-            }
-        }
-        // Dates row
-        LazyRow(Modifier.padding(vertical = 8.dp)) {
-            items(14) { index ->
-                val date = LocalDate.now().plusDays(index.toLong())
-                val isSelected = date == selectedDate
-                Box(
+
+        // Search card
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            onClick = { navController.navigate("handyman05") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset(y = (-48).dp)
+                .padding(horizontal = 16.dp)
+        ) {
+            Column {
+                // Location row
+                Row(
                     Modifier
-                        .size(40.dp)
-                        .padding(4.dp)
-                        .background(if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent, shape = MaterialTheme.shapes.small)
-                        .clickable { selectedDate = date },
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("${date.dayOfMonth}")
+                    Text(
+                        "Johannesburg, 1 Road Ubuntu",
+                        fontWeight = FontWeight.Medium,
+                        color = DarkText,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    IconButton(onClick = { navController.navigate("handyman03")  }) {
+                        Icon(
+                            Icons.Default.MyLocation,
+                            contentDescription = "Locate",
+                            tint = Orange500
+                        )
+                    }
+                }
+                Divider(color = BorderGray, thickness = 1.dp)
+                // Date & Need
+                Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .padding(16.dp)
+                    ) {
+                        Text("CHOOSE DATE", color = GrayText, fontSize = 12.sp)
+                        Spacer(Modifier.height(4.dp))
+                        Text(date, fontWeight = FontWeight.Medium, color = DarkText)
+                    }
+                    Divider(color = BorderGray, modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp))
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .padding(16.dp)
+                    ) {
+                        Text("NEED", color = GrayText, fontSize = 12.sp)
+                        Spacer(Modifier.height(4.dp))
+                        Text(need, fontWeight = FontWeight.Medium, color = DarkText)
+                    }
+                }
+                Divider(color = BorderGray, thickness = 1.dp)
+                Spacer(Modifier.height(8.dp))
+                // Search input
+                SearchField(
+                    text = searchQuery,
+                    onTextChange = { searchQuery = it },
+                    placeholder = "Search location / name",
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(Modifier.height(8.dp))
+                // Search button
+                Button(
+                    onClick = { navController.navigate("handyman03") },
+                    shape = RoundedCornerShape(28.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Orange500),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .padding(horizontal = 32.dp)
+                ) {
+                    Text("Search", color = Color.White)
+                }
+                Spacer(Modifier.height(16.dp))
+            }
+        }
+
+        // Favorites / Orders bar
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(Orange500)
+        ) {
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .clickable { /* favorites */ },
+                contentAlignment = Alignment.Center
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.FavoriteBorder, contentDescription = null, tint = Color.White)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Favorites", color = Color.White)
+                }
+            }
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .clickable { navController.navigate("handyman07") },
+                contentAlignment = Alignment.Center
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.ReceiptLong, contentDescription = null, tint = Color.White)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Orders", color = Color.White)
                 }
             }
         }
-        Divider()
-        // Time slots
-        LazyColumn {
-            items(listOf("01:00 PM","01:30 PM","02:00 PM","02:30 PM","03:00 PM","03:30 PM","04:00 PM")) { time ->
-                Text(
-                    time,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 12.dp)
-                        .clickable { /* select time */ }
-                )
-                Divider()
+
+        Spacer(Modifier.height(16.dp))
+
+        // Teachers header
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Teachers", fontWeight = FontWeight.Bold, color = DarkText)
+                Spacer(Modifier.width(8.dp))
+                Text("120", color = GrayText)
+            }
+            IconButton(onClick = { navController.navigate("handyman04") }) {
+                Icon(Icons.Default.Tune, contentDescription = null, tint = Orange500)
             }
         }
+
+        Spacer(Modifier.height(8.dp))
+
+        // Multiple technician cards
+        val technicians = listOf(
+            TechnicianData("Jessy Jones", "Johannesburg", listOf("Plumber", "Carpenter"), "4.8", "500 m", "$15/h"),
+            TechnicianData("Jean Down", "Pretoria", listOf("Electrician"), "4.6", "1.2 km", "$18/h"),
+            TechnicianData("Alice Smith", "Cape Town", listOf("Painter"), "4.9", "2.3 km", "$20/h"),
+            TechnicianData("Bob Brown", "Durban", listOf("Carpenter"), "4.7", "800 m", "$16/h")
+        )
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp), modifier = Modifier.padding(vertical = 8.dp)) {
+            technicians.forEach { tech ->
+                TechnicianCard(
+                    navController = navController,
+                    name = tech.name,
+                    location = tech.location,
+                    skills = tech.skills,
+                    rating = tech.rating,
+                    distance = tech.distance,
+                    price = tech.price
+                )
+            }
+        }
+
+        Spacer(Modifier.height(24.dp))
     }
 }
+
+data class TechnicianData(
+    val name: String,
+    val location: String,
+    val skills: List<String>,
+    val rating: String,
+    val distance: String,
+    val price: String
+)
 
 @Preview(showBackground = true)
 @Composable
