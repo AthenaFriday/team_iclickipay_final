@@ -1,122 +1,219 @@
 package com.athenafriday.handyman.screens
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.athenafriday.handyman.R
 
+private val Orange500 = Color(0xFFF77E1B)
+private val DarkText   = Color(0xFF1F1F1F)
+private val GrayText   = Color(0xFF9E9E9E)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Handyman05(navController: NavController) {
-    Column {
-        // Header image + home icon
-        Box {
-            Image(
-                painter = painterResource(R.drawable.handyman_header),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentScale = ContentScale.Crop
+    // state
+    var selectedDay by remember { mutableStateOf(6) }
+    var selectedTime by remember { mutableStateOf(0) }
+
+    val daysOfWeek = listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+    val dates     = listOf(4, 5, 6, 7, 8, 9, 10)
+    val times     = listOf(
+        "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+        "03:00 PM", "03:30 PM", "04:00 PM"
+    )
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Orange500)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
             )
-            IconButton(
-                onClick = { /* go home */ },
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Icon(Icons.Default.Home, contentDescription = "Home", tint = MaterialTheme.colorScheme.onPrimary)
-            }
-        }
-
-        Spacer(modifier = Modifier.height( -40.dp)) // overlap effect
-
-        // Search card
-        Card(
+        },
+        containerColor = Color.White
+    ) { inner ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                .padding(inner)
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.Top
         ) {
-            Column(Modifier.padding(16.dp)) {
-                Text("Johannesburg, 1 Road Ubuntu")
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("CHOOSE DATE  20 Mar - 10h", style = MaterialTheme.typography.bodySmall)
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Need   Plumber", style = MaterialTheme.typography.bodySmall)
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    placeholder = { Text("Search location / name") },
-                    modifier = Modifier.fillMaxWidth()
+            // Avatar + name
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.jessy_jones),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(CircleShape)
                 )
-                Spacer(modifier = Modifier.height(12.dp))
-                Button(
-                    onClick = { /* search */ },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Search")
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    "Jenny Jones",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = DarkText
+                )
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            // Month selector
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Spacer(Modifier.weight(1f))
+                Text(
+                    "March 2019",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = DarkText
+                )
+                IconButton(onClick = { /* next month */ }) {
+                    Icon(
+                        Icons.Default.ArrowForwardIos,
+                        contentDescription = "Next month",
+                        tint = Orange500
+                    )
                 }
             }
-        }
 
-        // Tabs
-        var tabIndex by remember { mutableStateOf(0) }
-        TabRow(selectedTabIndex = tabIndex) {
-            Tab(selected = tabIndex == 0, onClick = { tabIndex = 0 }) { Text("Favorites") }
-            Tab(selected = tabIndex == 1, onClick = { tabIndex = 1 }) { Text("Orders") }
-        }
+            Spacer(Modifier.height(16.dp))
 
-        // Provider list
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(3) { idx ->
-                ListItem(
+            // Days of week
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                daysOfWeek.forEach { day ->
+                    Text(day, color = GrayText, fontSize = 14.sp)
+                }
+            }
+
+            Spacer(Modifier.height(8.dp))
+
+            // Dates
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                dates.forEach { date ->
+                    val selected = date == selectedDay
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .background(if (selected) Orange500 else Color.Transparent)
+                            .clickable { selectedDay = date }
+                    ) {
+                        Text(
+                            date.toString(),
+                            color = if (selected) Color.White else DarkText,
+                            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+                        )
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+            Divider(color = GrayText, thickness = 1.dp)
+            Spacer(Modifier.height(8.dp))
+
+            // Time slots
+            times.forEachIndexed { idx, time ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { navController.navigate("handyman07") },
-                    leadingContent = {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = null,
-                            modifier = Modifier.size(40.dp)
+                        .clickable { selectedTime = idx }
+                        .padding(vertical = 12.dp)
+                ) {
+                    if (idx == selectedTime) {
+                        Box(
+                            Modifier
+                                .size(8.dp)
+                                .background(Orange500, shape = CircleShape)
                         )
-                    },
-                    headlineContent = { Text("Jessy Jones") },
-                    supportingContent = { Text("Johannesburg") },
-                    trailingContent = {
-                        Column(horizontalAlignment = Alignment.End) {
-                            Text("4.8 ★")
-                            Text("500 m")
-                            Text("$15/h")
-                        }
+                    } else {
+                        Spacer(Modifier.width(8.dp))
                     }
-                )
-                Divider()
+                    Spacer(Modifier.width(16.dp))
+                    Text(
+                        time,
+                        fontSize = 16.sp,
+                        fontWeight = if (idx == selectedTime) FontWeight.Medium else FontWeight.Normal,
+                        color = if (idx == selectedTime) DarkText else GrayText
+                    )
+                }
+                Divider(color = GrayText.copy(alpha = 0.3f), thickness = 1.dp)
             }
+
+            Spacer(Modifier.height(24.dp))
+
+            // Take appointment button
+            Button(
+                onClick = { navController.navigate("handyman07") },
+                shape = RoundedCornerShape(28.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Orange500),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    "Take appointment",
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            Spacer(Modifier.height(24.dp))
         }
     }
 }
