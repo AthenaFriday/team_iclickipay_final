@@ -1,3 +1,5 @@
+package com.athenafriday.tinderjerome.screens
+
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -20,13 +22,16 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.athenafriday.tinderjerome.data.Profile
-import com.athenafriday.tinderjerome.navigation.TinderDestinations
 import kotlinx.coroutines.launch
 
 @Composable
-fun SwipeScreen(navController: NavController) {
+fun SwipeScreen(
+    onProfileClick: () -> Unit,
+    onBoostClick: () -> Unit,
+    onLikeClick: () -> Unit,
+    onSuperLikeClick: () -> Unit
+) {
     val profiles = remember {
         mutableStateListOf(
             Profile("Alice", 25, com.athenafriday.tinderjerome.R.drawable.person1),
@@ -36,10 +41,9 @@ fun SwipeScreen(navController: NavController) {
     }
 
     var showInfoDialog by remember { mutableStateOf(false) }
-
     val offsetX = remember { Animatable(0f) }
     val swipeThreshold = 300f
-    val coroutineScope = rememberCoroutineScope() // ✅ valid scope
+    val coroutineScope = rememberCoroutineScope()
 
     if (profiles.isEmpty()) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -105,6 +109,7 @@ fun SwipeScreen(navController: NavController) {
                                         offsetX.animateTo(1000f, tween(300))
                                         profiles.removeAt(0)
                                         offsetX.snapTo(0f)
+                                        onLikeClick()
                                     }
 
                                     offsetX.value < -swipeThreshold -> {
@@ -150,7 +155,6 @@ fun SwipeScreen(navController: NavController) {
                 .padding(bottom = 24.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            // Dislike (❌)
             IconButton(
                 onClick = {
                     coroutineScope.launch {
@@ -167,9 +171,11 @@ fun SwipeScreen(navController: NavController) {
                 Icon(Icons.Default.Close, contentDescription = "Dislike", tint = Color.Red)
             }
 
-            // Info (ℹ️)
             IconButton(
-                onClick = { showInfoDialog = true },
+                onClick = {
+                    showInfoDialog = true
+                    onProfileClick()
+                },
                 modifier = Modifier
                     .size(60.dp)
                     .clip(CircleShape)
@@ -178,13 +184,13 @@ fun SwipeScreen(navController: NavController) {
                 Icon(Icons.Default.Info, contentDescription = "Info", tint = Color.Gray)
             }
 
-            // Like (❤️)
             IconButton(
                 onClick = {
                     coroutineScope.launch {
                         offsetX.animateTo(1000f, tween(300))
                         profiles.removeAt(0)
                         offsetX.snapTo(0f)
+                        onSuperLikeClick()
                     }
                 },
                 modifier = Modifier
@@ -195,5 +201,10 @@ fun SwipeScreen(navController: NavController) {
                 Icon(Icons.Default.Favorite, contentDescription = "Like", tint = Color.Green)
             }
         }
+    }
+
+    // Optional Boost Call
+    LaunchedEffect(Unit) {
+        onBoostClick()
     }
 }

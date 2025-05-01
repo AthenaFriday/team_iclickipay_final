@@ -10,21 +10,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.athenafriday.tinderjerome.navigation.TinderDestinations
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WelcomeScreen(navController: NavController) {
-    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-
+fun WelcomeScreen(
+    onGetStarted: () -> Unit,
+    onBack: () -> Unit = {} // Optional fallback for preview or when no back action is needed
+) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Welcome") },
                 navigationIcon = {
-                    IconButton(onClick = { backDispatcher?.onBackPressed() }) {
+                    IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 }
@@ -38,9 +36,7 @@ fun WelcomeScreen(navController: NavController) {
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            Button(
-                onClick = { navController.navigate(TinderDestinations.AddPhoto) }
-            ) {
+            Button(onClick = onGetStarted) {
                 Text(text = "Get Started")
             }
         }
@@ -50,5 +46,8 @@ fun WelcomeScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun WelcomeScreenPreview() {
-    WelcomeScreen(navController = rememberNavController())
+    WelcomeScreen(
+        onGetStarted = {},
+        onBack = {}
+    )
 }

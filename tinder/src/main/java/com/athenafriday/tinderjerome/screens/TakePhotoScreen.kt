@@ -1,28 +1,27 @@
 package com.athenafriday.tinderjerome.screens
 
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.athenafriday.tinderjerome.navigation.TinderDestinations
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun TakePhotoScreen(navController: NavController) {
-    Scaffold { paddingValues -> // ✅ Capture padding
+fun TakePhotoScreen(
+    onNext: () -> Unit
+) {
+    Scaffold { paddingValues ->
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues) // ✅ Apply system bars padding
-                .padding(24.dp)          // ✅ Plus your own custom padding
+                .padding(paddingValues)
+                .padding(24.dp)
         ) {
             Button(
-                onClick = { navController.navigate(TinderDestinations.CompleteProfile) }
+                onClick = onNext
             ) {
                 Text(text = "Take a Photo")
             }
@@ -33,5 +32,5 @@ fun TakePhotoScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun TakePhotoScreenPreview() {
-    TakePhotoScreen(navController = rememberNavController())
+    TakePhotoScreen(onNext = {})
 }

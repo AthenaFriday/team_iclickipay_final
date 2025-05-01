@@ -1,18 +1,33 @@
 package com.athenafriday.tinderjerome.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SuperLikeScreen(navController: NavController) {
-    Scaffold { paddingValues ->
+fun SuperLikeScreen(onBackClick: () -> Unit) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Super Like") },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -25,7 +40,7 @@ fun SuperLikeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             PurchaseOptions()
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { /* SuperLike Now */ }) {
+            Button(onClick = { /* Super Like logic here */ }) {
                 Text(text = "Super Like")
             }
         }
@@ -44,5 +59,5 @@ private fun PurchaseOptions() {
 @Preview(showBackground = true)
 @Composable
 fun SuperLikeScreenPreview() {
-    SuperLikeScreen(navController = rememberNavController())
+    SuperLikeScreen(onBackClick = {})
 }

@@ -1,21 +1,36 @@
 package com.athenafriday.tinderjerome.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class) // ✅ Opt into experimental Material3 API
 @Composable
-fun AccountSettingsScreen(navController: NavController) {
+fun AccountSettingsScreen(onBackClick: () -> Unit) {
     var distance by remember { mutableStateOf(50f) }
     var ageRange by remember { mutableStateOf(25f) }
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Settings") },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,5 +72,5 @@ fun AccountSettingsScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun AccountSettingsScreenPreview() {
-    AccountSettingsScreen(navController = rememberNavController())
+    AccountSettingsScreen(onBackClick = {})
 }
